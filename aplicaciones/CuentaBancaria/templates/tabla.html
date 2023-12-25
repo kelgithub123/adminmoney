@@ -1,0 +1,30 @@
+{% block tablaCuenta %}
+
+<table>
+    <thead>
+        <th>Nro</th>
+        <th>BANCO</th>
+        <th>CAPITAL INICIAL</th>
+        <th>TIPO</th>
+        <th>ESTADO ACTUAL</th>
+        <th>ACCIONES</th>
+    </thead>
+    <tbody>
+        {% for cta in cuentas %}
+        <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{cta.banco}}</td>
+        <td>{{cta.capital}}</td>
+        <td>{{cta.tipo}}</td>
+        <td>{{cta.interes}}</td>
+        <td>
+            <button><a class="btntabla" href="">editar</a></button>
+            <button><a href="">eliminar</a></button>
+            <button><a href="">ABONAR</a></button>
+            <button><a href="">RETIRAR</a></button>
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% include "Navegacion.html" %}
+<form action="../RegCuentas" method="POST">{% csrf_token %}
+    <ul class="regul">
+        <li class="regli"><label for="">banco</label>
+            <input name='banco' class="reginput" type="text"></li>
+        <li class="regli"><label for="">capital</label>
+            <input name='capital' class="reginput" type="number"></li>
+        <li class="regli"><label for="">tipo</label>
+            <select class="regselect" name="tipoDcuenta" id="">
+                <option class="regoption" value="ahorro">ahorro</option>
+                <option class="regoption" value="corriente" selected >corriente</option>
+                <option class="regoption" value="debito">debito</option>
+            </select>
+            </li>
+        <li class="regli"><label for="">interes</label>
+            <input name='interes' step="0.001" class="reginput" type="number">
+            </li>
+    </ul>
+    <input type="submit" value="enviar">
+</form>
+{% include "footer.html" %}
