@@ -1,16 +1,10 @@
 from django.db import models
-
+from ..CuentaBancaria.models import *
 # Create your models here.
-class materiales(models.Model):
-    id=models.AutoField(primary_key=True)
-    nombre=models.CharField(max_length=35)
-    cantidad=models.IntegerField
-    unidad=models.CharField(max_length=3)
-    precio=models.FloatField(max_length=6)
-    preciounit=models.FloatField(max_length=6)
-    
-
-    def __str__(self):
-        texto="{1} {2} {5}" 
-        return texto.format(self.nombre,self.cantidad,self.preciounit)
-   
+class compra(models.Model):
+    id_compra=models.AutoField(primary_key=True)
+    descripcion=models.CharField(max_length=25)
+    tipo=models.CharField(max_length=20)
+    precio_unitario=models.FloatField(max_length=6)
+    cantidad=models.SmallIntegerField
+    id_cuenta=models.ForeignKey(cuenta,on_delete=models.CASCADE)
