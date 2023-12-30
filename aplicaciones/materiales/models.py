@@ -9,7 +9,8 @@ class materiales(models.Model):
     precio=models.FloatField(max_length=6)
     preciounit=models.FloatField(max_length=6)
     
+
     def __str__(self):
         texto="{1} {2} {5}" 
         return texto.format(self.nombre,self.cantidad,self.preciounit)
-        
+   

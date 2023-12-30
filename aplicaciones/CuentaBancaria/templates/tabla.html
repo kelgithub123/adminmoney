@@ -1,15 +1,14 @@
-{% block tablaCuenta %}
-
+{% extends "ListaDcuentas.html" %}
+{% block contenido %}
 <table>
-    <thead>
+    <tr>
         <th>Nro</th>
         <th>BANCO</th>
         <th>CAPITAL INICIAL</th>
         <th>TIPO</th>
         <th>ESTADO ACTUAL</th>
         <th>ACCIONES</th>
-    </thead>
-    <tbody>
+    </tr>
         {% for cta in cuentas %}
         <tr>
         <td>{{forloop.counter}}</td>

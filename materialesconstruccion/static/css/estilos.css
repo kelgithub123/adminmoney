@@ -1,0 +1,63 @@
+h1{
+    color:red;
+    margin-left:40% ;
+    font-family: 'Roboto';
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fuentes/Lobster/Lobster-Regular.ttf') format('');
+  }
+body{
+    background: rgb(61,94,221);
+background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%); 
+}
+.navli{
+    display:inline;
+    margin: 0px 20px;
+    background-color: aqua;
+    padding: 0px 20px;
+    border-radius: 5px;
+    
+}
+.navul{
+    background-color: blueviolet;
+    padding: 20px;
+    margin-top: 0px;
+}
+.nava{
+    color: white;
+    text-decoration:none;
+}
+.reginput{
+    margin: 20px;
+}
+.regul{
+    list-style: none;
+}
+a.btntabla{
+    text-decoration:none;
+}
+.contentabla{
+    padding: 0px 150px;
+}
+span{
+    background-color: aliceblue;
+}

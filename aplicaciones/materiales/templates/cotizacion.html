@@ -1,97 +1,29 @@
+{% extends "encabezado.html" %}
+{% load static %}
+{% block contenido %}
+<div class="contentabla">
 <form action="" method="post">
-    <table   style="text-align: center;">
-        <thead>
+    <table id="tablaCotizacion">
+        <tr>
             <th>DESCRIPCION</th>
             <th>CANTIDAD</th>
             <th>COSTO UNIT</th>
             <th>SUBTOTAL</th>
-        </thead>    
-        <tbody id="tablaCotizacion">
+        </tr>                
         <tr>
-                <td><input type="text"></td>
-                <td><input class="cantidad" type="text" onchange="calculototal()" ></td>
-                <td><input class="costounit" type="number" onchange="calcularSubtotal()" ></td>
+                <td><input name="descrip1" type="text"></td>
+                <td><input name="cant1" class="cantidad" type="text" onchange="calculototal()" ></td>
+                <td><input name="costoUnit1" class="costounit" type="number" onchange="calcularSubtotal()" ></td>
                 <td><input class="subtotal" step="0.001" type="number" onchange="calcularcostounit()" > </td>
-        </tr>
-        </tbody>
-    </table>    
-    <button type="submit" class="btn btn-primary">ENVIAR</button>
-</form>
-<button onclick="addfila()">+</button><br>
-<button onclick="deletfila()">-</button><br>                                
-                <strong>TOTAL A PAGAR:</strong>
-                <span class="total">0</span><span>Bs.</span>
-<Script>
-function calcularSubtotal(){
-let costounit=document.querySelectorAll(".costounit");
-let cantidad=document.querySelectorAll(".cantidad");
-git salet subtotal=document.querySelectorAll(".subtotal");
-let total=0;
-    for(var i=0;i<=costounit.length-1;i++){
-        subtotal[i].value=costounit[i].value*cantidad[i].value;  
-            }
-calculototal();
-            
-}
+        </tr>          
+        
+    </table>
+    <strong>TOTAL A PAGAR:</strong>
+    <span class="total">0</span><span>Bs.</span>    <span><button type="submit">PAGAR</button></span>  
+    </form>      
+<button onclick="addfila()">+ add fila</button>
+<button onclick="deletfila()">- delete fila</button><br>                                
 
-function calcularcostounit(){
-let costounit=document.querySelectorAll(".costounit");
-let cantidad=document.querySelectorAll(".cantidad");
-let subtotal=document.querySelectorAll(".subtotal");
-let total=0;
-    for(var i=0;i<=costounit.length-1;i++){  
-            costounit[i].value=subtotal[i].value / cantidad[i].value;    
-    }
-    calculototal();
-           
-}
-
-function calculototal(){
-let costounit=document.querySelectorAll(".costounit");
-let cantidad=document.querySelectorAll(".cantidad");
-let subtotal=document.querySelectorAll(".subtotal");
-let total=0;
-    for(var i=0;i<=costounit.length-1;i++){
-            subtot=costounit[i].value*cantidad[i].value;
-            total=total+subtot;
-    }
-            document.querySelector(".total").innerHTML=total;
-}
-
-function addfila(){
-    inputdescr=document.createElement('input')
-    descrip=document.createElement('td')
-    descrip.appendChild(inputdescr)
-
-    inputcantidad=document.createElement('input');
-    inputcantidad.classList.add('cantidad');
-    inputcantidad.addEventListener('change', calculototal)
-    cantidad=document.createElement('td');
-    cantidad.appendChild(inputcantidad);
-
-    inputcosto=document.createElement('input');
-    inputcosto.classList.add('costounit');
-    inputcosto.addEventListener('change', calcularSubtotal);
-    costo=document.createElement('td');
-    costo.appendChild(inputcosto);
-
-    inputsubtotal=document.createElement('input');
-    inputsubtotal.classList.add('subtotal');
-    inputsubtotal.addEventListener('change', calcularcostounit);
-    subtotal=document.createElement('td');
-    subtotal.appendChild(inputsubtotal);
-
-    fila=document.createElement('tr')
-    fila.appendChild(descrip)
-    fila.appendChild(cantidad)
-    fila.appendChild(costo)
-    fila.appendChild(subtotal)
-    document.getElementById('tablaCotizacion').appendChild(fila)
-}
-
-function deletfila(){
-    numero=document.getElementById('tablaCotizacion');
-    numero.removeChild(numero.lastChild);
-    calculototal();
-}
-</Script>
+</div>    
+    
+{% endblock  %}

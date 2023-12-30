@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/estilos.css' %}" />
+    <script src="{% static '/js/calculadora.js' %}"></script>
     <title>Document</title>
-
 </head>
 <body>
-    {% block navegacion %}
+    {% include "Navegacion.html" %}
+    <h1>un inicio</h1>
+    {% block contenido %}
     {% endblock  %}
-    <h1>un incio</h1>
- 
+</body>
+</html>
