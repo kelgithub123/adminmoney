@@ -1,32 +1,35 @@
 {% extends "encabezado.html" %}
 {% block contenido %}
-<table>
-    <thead>
-        <th>Nro</th>
-        <th>BANCO</th>
-        <th>CAPITAL INICIAL</th>
-        <th>TIPO</th>
-        <th>INTERES</th>
-        <th>SALDO ACTUAL</th>
-        <th>ACCIONES</th>
-    </thead>
-    <tbody>
-        {% for cta in cuentas %}
+<div class='contentabla'>
+    <table>
         <tr>
-        <td>{{forloop.counter}}</td>
-        <td>{{cta.banco}}</td>
-        <td>{{cta.capital}}</td>
-        <td>{{cta.tipo}}</td>
-        <td>{{cta.interes}}</td>
-        <td></td>
-        <td>
-            <button><a class="btntabla" href="">MODIFICAR</a></button>
-            <button><a class="btntabla" href="">BORRAR</a></button>
-            <button><a class="btntabla" href="">ABONO</a></button>
-            <button><a class="btntabla" href="">RETIRO</a></button>
-        </td>
+            <th>Nro</th>
+            <th>BANCO</th>
+            <th>CAPITAL INICIAL</th>
+            <th>TIPO</th>
+            <th>INTERES</th>
+            <th>SALDO ACTUAL</th>
+            <th>MONTO A OPERAR</th>
+            <th>ACCIONES</th>
         </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% for cta in cuentas %}
+            <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{cta.banco}}</td>
+            <td>{{cta.capital}}</td>
+            <td>{{cta.tipo}}</td>
+            <td>{{cta.interes}}</td>
+            <td></td>
+            <td><input type="text"></td>
+            <td>
+                <button><a class="btntabla" href="">MODIFICAR</a></button>
+                <button><a class="btntabla" href="">BORRAR</a></button>
+                <button><a class="btntabla" href="">ABONO</a></button>
+                <button><a class="btntabla" href="">RETIRO</a></button>
+            </td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+
 {% endblock  %}

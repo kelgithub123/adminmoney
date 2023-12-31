@@ -14,19 +14,19 @@ class cuenta(models.Model):
         return texto.format(self.banco,self.capital)
 
 class transaccion(models.Model):
-    id=models.AutoField(primary_key=True)
+    id_t=models.AutoField(primary_key=True)
+    id_c=models.ForeignKey(cuenta,on_delete=models.CASCADE,default=0)
     fechanow=datetime.date.today()
     format = fechanow.strftime('%Y'+'-'+'%m'+'-'+'%d')
-    retiro=models.FloatField(max_length=6)
-    Abono=models.FloatField(max_length=6)
+    retiro=models.FloatField(max_length=6,default=0)
+    Abono=models.FloatField(max_length=6,default=0)
     fecha=models.DateField(default=fechanow,editable=True)
 
     def __str__(self):
         texto="{1}{2}"
         return texto.format(self.retiro,self.fecha)
 
-class montoefectivo(models.Model):
+class efectivo(models.Model):
     id_m=models.IntegerField
     capital=models.FloatField(max_length=6)
     id_cta=models.ForeignKey(cuenta,on_delete=models.CASCADE)
-

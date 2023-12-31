@@ -1,8 +1,12 @@
 {% extends "encabezado.html" %}
 {% load static %}
 {% block contenido %}
+                           
+
 <div class="contentabla">
-<form action="" method="post">
+    <button onclick="addfila()">+ add fila</button>
+    <button onclick="deletfila()">- delete fila</button><br>     
+    <form action="" method="post">{% csrf_token %}
     <table id="tablaCotizacion">
         <tr>
             <th>DESCRIPCION</th>
@@ -19,11 +23,24 @@
         
     </table>
     <strong>TOTAL A PAGAR:</strong>
-    <span class="total">0</span><span>Bs.</span>    <span><button type="submit">PAGAR</button></span>  
-    </form>      
-<button onclick="addfila()">+ add fila</button>
-<button onclick="deletfila()">- delete fila</button><br>                                
+    <span class="total">0</span><span>Bs.</span>          
+</div>
+<div class="contentabla">
+    <table>
+        <tr>
+            <th>ORIGEN DE FONDO</th>
+            <th>MONTO DISP</th>
+            <th>OPERACION</th>
+        </tr>
+        {% for c in cuenta %}
+        <tr>
 
+            <td>{{c.banco}}</td>
+            <td>{{c.capital}}</td>
+            <td><button type="submit">REGISTRAR PAGO</button></td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>    
-    
+</form>    
 {% endblock  %}
