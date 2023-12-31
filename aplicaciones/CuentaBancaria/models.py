@@ -7,6 +7,7 @@ class cuenta(models.Model):
     id_c=models.AutoField(primary_key=True)
     banco=models.CharField (max_length=20)
     capital=models.FloatField(max_length=6)
+    fecha=models.DateField(editable=True)
     tipo=models.CharField(max_length=10,default='corriente')
     interes=models.FloatField(max_length=6,default=0.00)  
     def __str__(self):
