@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.menuRegcuenta,name='inicio'),
     path('RegCuentas',views.registrarcuenta),
-    path('cuentas',views.listaDecuentas)
-    # path('retiro')    
+    path('cuentas',views.listaDecuentas),
+    path('retiro/<idcta>',views.retirar)    
 ]

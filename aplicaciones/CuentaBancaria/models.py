@@ -24,8 +24,8 @@ class transaccion(models.Model):
     fecha=models.DateField(default=fechanow,editable=True)
 
     def __str__(self):
-        texto="{1}{2}"
-        return texto.format(self.retiro,self.fecha)
+        texto="{0}'-'{1}"
+        return texto.format(self.id_c.banco,self.retiro)
 
 class efectivo(models.Model):
     id_m=models.IntegerField

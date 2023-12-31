@@ -72,3 +72,4 @@ function calcularSubtotal(){
         numero.removeChild(numero.lastChild);
         calculototal();
     }
+ 

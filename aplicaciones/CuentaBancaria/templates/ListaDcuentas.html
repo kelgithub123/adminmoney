@@ -20,12 +20,14 @@
             <td>{{cta.tipo}}</td>
             <td>{{cta.interes}}</td>
             <td></td>
-            <td><input type="text"></td>
+            <form action="/retiro/{{cta.id_c}}" method="post"> {% csrf_token %}
+            <td><input type="number" name="num"></td>
             <td>
-                <button><a class="btntabla" href="">MODIFICAR</a></button>
-                <button><a class="btntabla" href="">BORRAR</a></button>
-                <button><a class="btntabla" href="">ABONO</a></button>
-                <button><a class="btntabla" href="">RETIRO</a></button>
+                <input type="submit" class='btntabla' value="MODIFICAR">
+                <input type="submit" class='btntabla' value="BORRAR">
+                <input type="submit" class='btntabla' value="ABONAR">
+                <input type="submit" class='btntabla' value="RETIRAR">
+            </form>
             </td>
             </tr>
             {% endfor %}
