@@ -6,18 +6,26 @@
 <div class="contentabla">
     <button onclick="addfila()">+ add fila</button>
     <button onclick="deletfila()">- delete fila</button><br>     
-    <form action="" method="post">{% csrf_token %}
+    <form action="/regispago" method="post">{% csrf_token %}
     <table id="tablaCotizacion">
         <tr>
             <th>DESCRIPCION</th>
             <th>CANTIDAD</th>
             <th>COSTO UNIT</th>
+            <th>TIPO</th>
             <th>SUBTOTAL</th>
         </tr>                
         <tr>
                 <td><input name="descrip1" type="text"></td>
                 <td><input name="cant1" class="cantidad" type="text" onchange="calculototal()" ></td>
                 <td><input name="costoUnit1" class="costounit" type="number" onchange="calcularSubtotal()" ></td>
+                <TD>
+                    <select name="tipo1" id="">
+                        <option value="construccion">construccion</option>
+                        <option value="alimentacion">alimentacion</option>
+                        <option   value="vivienda">vivienda</option>
+                    </select>
+                </TD>
                 <td><input class="subtotal" step="0.001" type="number" onchange="calcularcostounit()" > </td>
         </tr>          
         
@@ -30,17 +38,21 @@
         <tr>
             <th>ORIGEN DE FONDO</th>
             <th>MONTO DISP</th>
-            <th>OPERACION</th>
+            <th>REGISTRAR PAGO</th>
+        
         </tr>
         {% for c in cuenta %}
         <tr>
-
             <td>{{c.banco}}</td>
             <td>{{c.capital}}</td>
-            <td><button type="submit">REGISTRAR PAGO</button></td>
+            <td><input type="submit" onclick="obtener(this.value)" name="id_cta" value={{c.id_c}}></td>
+        
         </tr>
         {% endfor %}
     </table>
-</div>    
+    <input type="hidden" id="banco" value="id banco">
+    <input type="hidden" id="num" name="num" value="1">
+</div>  
+  
 </form>    
 {% endblock  %}

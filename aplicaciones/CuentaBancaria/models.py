@@ -11,8 +11,8 @@ class cuenta(models.Model):
     tipo=models.CharField(max_length=10,default='corriente')
     interes=models.FloatField(max_length=6,default=0.00)  
     def __str__(self):
-        texto = "{0}{1}"
-        return texto.format(self.banco,self.capital)
+        texto = "{0}{1}{2}"
+        return texto.format(self.banco,self.capital,self.id_c)
 
 class transaccion(models.Model):
     id_t=models.AutoField(primary_key=True)

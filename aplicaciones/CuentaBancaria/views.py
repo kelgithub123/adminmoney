@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import cuenta,transaccion
+from ..materiales.models import *
 # Create your views here.
 def menuRegcuenta(request):    
-    return render(request,"registroCuenta.html",{"cuentas":"cuentas"})
+    return render(request,"registroCuenta.html")
 
 def registrarcuenta(request):
     ban= request.POST['banco']
@@ -20,6 +21,9 @@ def filtraEstadosCuenta():
         totalr=totalretiros(ct.id_c)
         totala=totalabonos(ct.id_c)
         ct.capital=ct.capital+totala-totalr
+        ct.capini=ct.capital+totala+totalr
+        ct.retiros=totalr
+        ct.abonos=totala
         listcuentas.append(ct)
     return listcuentas
 
@@ -34,11 +38,17 @@ def retirar(request,idcta):
 
 def totalretiros(id):
     saldo=transaccion.objects.filter(id_c=id)
+    Compras=compra.objects.filter(id_cuenta=id)
     totalRetiros=0
+    totcompras=0
     if (saldo):
         for s in saldo:
             totalRetiros=s.retiro+totalRetiros
-    return totalRetiros
+    if (Compras):    
+        for c in Compras:
+            totcompras=(c.cantidad*c.precio_unitario)+totcompras
+    total=totcompras+totalRetiros;        
+    return total
 
 def totalabonos(id):
     saldo=transaccion.objects.filter(id_c=id)

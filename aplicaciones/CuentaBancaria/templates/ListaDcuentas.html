@@ -8,6 +8,8 @@
             <th>CAPITAL INICIAL</th>
             <th>TIPO</th>
             <th>INTERES</th>
+            <th>RETIROS</th>
+            <th>ABONOS</th>
             <th>SALDO ACTUAL</th>
             <th>MONTO A OPERAR</th>
             <th>ACCIONES</th>
@@ -16,10 +18,12 @@
             <tr>
             <td>{{forloop.counter}}</td>
             <td>{{cta.banco}}</td>
-            <td>{{cta.capital}}</td>
+            <td>{{cta.capini}}</td>
             <td>{{cta.tipo}}</td>
             <td>{{cta.interes}}</td>
-            <td></td>
+            <td>{{cta.retiros}}</td>
+            <td>{{cta.abonos}}</td>
+            <td>{{cta.capital}}</td>
             <form action="/retiro/{{cta.id_c}}" method="post"> {% csrf_token %}
             <td><input type="number" name="num"></td>
             <td>
