@@ -31,8 +31,8 @@ def listaDecuentas(request):
     ctafil=filtraEstadosCuenta
     return render(request,"ListaDcuentas.html",{"cuentas":ctafil})
 
-def retirar(request,idcta,monto):
-    #monto=request.POST['num']
+def retirar(request,idcta):
+    monto=request.POST['num']
     trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=idcta))
     if (trans):
         efect=efectivo.objects.create(capital=monto,id_cta=cuenta.objects.get(id_c=idcta))

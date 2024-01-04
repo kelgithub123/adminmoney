@@ -49,19 +49,6 @@ function calcularSubtotal(){
         }
     }
 
-<<<<<<< HEAD
-    function obtenermonto(id){
-        monto=document.getElementById('monto').value;
-        console.log(monto);
-        console.log(id);
-        alert('retiro/'+id+'/'+monto);
-        location.href='retiro/'+id+'/'+monto
-        //replace("Ruth's", 'my')
-        //link=formulario.action
-        //ruta=link.substr(-1);
-        //formulario.action='/retiro/'+ruta;
-        //console.log(formulario.action);
-=======
     function retiroform(){
         formulario=document.getElementsByClassName('formulario');
         Array.from(formulario).forEach(function(refer){
@@ -71,7 +58,6 @@ function calcularSubtotal(){
             refer.action='retiro/'+id;
             console.log(refer.action);
         });
->>>>>>> tmp
     }
 
     function abonoform(){
