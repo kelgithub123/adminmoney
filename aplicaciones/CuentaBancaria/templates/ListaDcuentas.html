@@ -15,7 +15,7 @@
             <th>ACCIONES</th>
         </tr>
             {% for cta in cuentas %}
-            <tr>
+            <tr> 
             <td>{{forloop.counter}}</td>
             <td>{{cta.banco}}</td>
             <td>{{cta.capini}}</td>
@@ -23,17 +23,9 @@
             <td>{{cta.interes}}</td>
             <td>{{cta.retiros}}</td>
             <td>{{cta.abonos}}</td>
-            <td>{{cta.capital}}</td>
-            <form id="formulario" action="/RUTAS/{{cta.id_c}}" method="post"> {% csrf_token %}
-            <td><input type="number" name="num"></td>
-        
-            <td>
-                <button><a href="">MODIFICAR</a></button>
-                <button><a href="">BORRAR</a></button>
-                <input onclick="formtoabono()"  type="submit" value="RETIRAR">
-                <button><a href="">RETIRAR</a></button>
-            </td>
-        </form>
+            <td>{{cta.capital}}</td>          
+            <td><input type="number" id="monto" name="num" value="0"></td>
+            <td><button><a onclick="obtenermonto({{cta.id_c}})" href="">retirar</a></button></td>
             </tr>
             {% endfor %}
     </table>
