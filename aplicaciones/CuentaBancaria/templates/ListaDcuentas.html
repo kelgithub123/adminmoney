@@ -24,18 +24,18 @@
             <td>{{cta.retiros}}</td>
             <td>{{cta.abonos}}</td>
             <td>{{cta.capital}}</td>
-            <form action="/retiro/{{cta.id_c}}" method="post"> {% csrf_token %}
+            <form id="formulario" action="/RUTAS/{{cta.id_c}}" method="post"> {% csrf_token %}
             <td><input type="number" name="num"></td>
+        
             <td>
-                <input type="submit" class='btntabla' value="MODIFICAR">
-                <input type="submit" class='btntabla' value="BORRAR">
-                <input type="submit" class='btntabla' value="ABONAR">
-                <input type="submit" class='btntabla' value="RETIRAR">
-            </form>
+                <button><a href="">MODIFICAR</a></button>
+                <button><a href="">BORRAR</a></button>
+                <input onclick="formtoabono()"  type="submit" value="RETIRAR">
+                <button><a href="">RETIRAR</a></button>
             </td>
+        </form>
             </tr>
             {% endfor %}
     </table>
 </div>
-
 {% endblock  %}

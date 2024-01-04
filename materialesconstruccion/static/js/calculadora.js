@@ -49,6 +49,16 @@ function calcularSubtotal(){
         }
     }
 
+    function formtoabono(){
+        formulario=document.getElementById('formulario');
+        console.log(formulario.action);
+        link=formulario.action
+        ruta=link.substr(-1);
+        
+        formulario.action='/retiro/'+ruta;
+        console.log(formulario.action);
+    }
+
     function addfila(){
         i=i+1
         inputdescr=document.createElement('input');
