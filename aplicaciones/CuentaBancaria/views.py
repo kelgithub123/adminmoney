@@ -57,6 +57,7 @@ def totalretiros(id):
     total=totcompras+totalRetiros;        
     return total
 
+
 def totalabonos(id):
     saldo=transaccion.objects.filter(id_c=id)
     total=0
@@ -64,3 +65,12 @@ def totalabonos(id):
         for s in saldo:
             total=s.Abono+total
     return total
+
+def operaciones(request):
+    list=[]
+    com=compra.objects.all()
+    for c in com:
+        c.subtotal=c.cantidad*c.precio_unitario
+        c.montopagado=c.id_cuenta.capital-c.subtotal
+        list.append(c)
+    return render(request,'Operaciones.html',{'compras':list})

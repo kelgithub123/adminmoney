@@ -6,5 +6,6 @@ urlpatterns = [
     path('RegCuentas',views.registrarcuenta),
     path('cuentas',views.listaDecuentas),
     path('retiro/<idcta>',views.retirar),
-    path('abono/<idcta>',views.abonar)    
+    path('abono/<idcta>',views.abonar),
+    path('operaciones',views.operaciones)    
 ]

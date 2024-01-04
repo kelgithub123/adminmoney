@@ -6,31 +6,29 @@
             <th>Nro</th>
             <th>DESCRIPCION</th>
             <th>CANTIDAD</th>
-            <th>TIPO</th>
-            <th>BANCO</th>
-            <th>MONTO DEBITADO</th>
-            <th>TOTAL PAGADO</th>
+            <th>COSTO/U</th>
+            <th>TOTAL</th>
+            <th>ORIGEN CAPITAL</th>    
+            <th>CAPITAL</th>
+            <th>MONTO PAGADO</th>
+            <th>ESTADO CAPITAL</th>
             <th>SALDO EN CHEQUERA</th>
         </tr>
-            {% for cta in cuentas %}
+            {% for c in compras %}
             <tr>
-            <form class="formulario" action="{{cta.id_c}}" method="post"> {% csrf_token %}
             <td>{{forloop.counter}}</td>
-            <td>{{cta.banco}}</td>
-            <td>{{cta.capini}}</td>
-            <td>{{cta.tipo}}</td>
-            <td>{{cta.interes}}</td>
-            <td>{{cta.retiros}}</td>
-            <td>{{cta.abonos}}</td>
-            <td>{{cta.capital}}</td>
-            <td><input type="number" name="num"></td>
-       
+            <td>{{c.descripcion}}</td>
+            <td>{{c.cantidad}}</td>
+            <td>{{c.precio_unitario}}</td>
+            <td>{{c.subtotal}}</td>
+            <td>{{c.id_cuenta.banco}}</td>
+            <td>{{c.id_cuenta.capital}}</td>
+            <td>{{c.montopagado}}</td>
+            <td></td>
+            <td></td>       
             <td>
                 <input onclick="modificarform()" type="submit" value="MODIFICAR">
                 <input onclick="eliminarform()" type="submit" value="ELIMINAR">
-                <input onclick="abonoform()" type="submit" value="ABONAR">
-                <input onclick="retiroform()"  type="submit" value="RETIRAR">
-                
             </td>
         
             </tr>
