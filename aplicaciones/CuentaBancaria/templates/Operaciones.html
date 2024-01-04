@@ -1,0 +1,41 @@
+{% extends "encabezado.html" %}
+{% block contenido %}
+<div class='contentabla'>
+    <table>
+        <tr>
+            <th>Nro</th>
+            <th>DESCRIPCION</th>
+            <th>CANTIDAD</th>
+            <th>TIPO</th>
+            <th>BANCO</th>
+            <th>MONTO DEBITADO</th>
+            <th>TOTAL PAGADO</th>
+            <th>SALDO EN CHEQUERA</th>
+        </tr>
+            {% for cta in cuentas %}
+            <tr>
+            <form class="formulario" action="{{cta.id_c}}" method="post"> {% csrf_token %}
+            <td>{{forloop.counter}}</td>
+            <td>{{cta.banco}}</td>
+            <td>{{cta.capini}}</td>
+            <td>{{cta.tipo}}</td>
+            <td>{{cta.interes}}</td>
+            <td>{{cta.retiros}}</td>
+            <td>{{cta.abonos}}</td>
+            <td>{{cta.capital}}</td>
+            <td><input type="number" name="num"></td>
+       
+            <td>
+                <input onclick="modificarform()" type="submit" value="MODIFICAR">
+                <input onclick="eliminarform()" type="submit" value="ELIMINAR">
+                <input onclick="abonoform()" type="submit" value="ABONAR">
+                <input onclick="retiroform()"  type="submit" value="RETIRAR">
+                
+            </td>
+        
+            </tr>
+        </form>
+            {% endfor %}
+    </table>
+</div>
+{% endblock  %}

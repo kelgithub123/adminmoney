@@ -1,7 +1,7 @@
 h1{
     color:red;
     margin-left:40% ;
-    font-family: 'Roboto';
+ font-family: 'Roboto';
 }
 table {
     font-family: arial, sans-serif;
@@ -21,10 +21,8 @@ table {
   tr:nth-child(odd) {
     background-color: #ffffff;
   }
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fuentes/Lobster/Lobster-Regular.ttf') format('');
-  }
+   
+
 body{
     background: rgb(61,94,221);
 background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%); 

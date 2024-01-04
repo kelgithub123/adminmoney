@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import cuenta,transaccion
+from .models import *
 from ..materiales.models import *
 # Create your views here.
 def menuRegcuenta(request):    
@@ -34,6 +34,13 @@ def listaDecuentas(request):
 def retirar(request,idcta):
     monto=request.POST['num']
     trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=idcta))
+    if (trans):
+        efect=efectivo.objects.create(capital=monto,id_cta=cuenta.objects.get(id_c=idcta))
+    return redirect('/cuentas')
+
+def abonar(request,idcta):
+    monto=request.POST['num']
+    trans=transaccion.objects.create(Abono=monto,id_c=cuenta.objects.get(id_c=idcta))
     return redirect('/cuentas')
 
 def totalretiros(id):
