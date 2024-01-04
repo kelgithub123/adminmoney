@@ -49,6 +49,7 @@ function calcularSubtotal(){
         }
     }
 
+<<<<<<< HEAD
     function obtenermonto(id){
         monto=document.getElementById('monto').value;
         console.log(monto);
@@ -60,7 +61,30 @@ function calcularSubtotal(){
         //ruta=link.substr(-1);
         //formulario.action='/retiro/'+ruta;
         //console.log(formulario.action);
+=======
+    function retiroform(){
+        formulario=document.getElementsByClassName('formulario');
+        Array.from(formulario).forEach(function(refer){
+            console.log(refer.action);
+            lnk=refer.action;
+            id=lnk.substr(-1);
+            refer.action='retiro/'+id;
+            console.log(refer.action);
+        });
+>>>>>>> tmp
     }
+
+    function abonoform(){
+        formulario=document.getElementsByClassName('formulario');
+        Array.from(formulario).forEach(function(refer){
+            console.log(refer.action);
+            lnk=refer.action;
+            id=lnk.substr(-1);
+            refer.action='abono/'+id;
+            console.log(refer.action);
+        });
+    }
+
 
     function addfila(){
         i=i+1

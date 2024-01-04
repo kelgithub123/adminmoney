@@ -15,7 +15,12 @@
             <th>ACCIONES</th>
         </tr>
             {% for cta in cuentas %}
+<<<<<<< HEAD
             <tr> 
+=======
+            <tr>
+            <form class="formulario" action="{{cta.id_c}}" method="post"> {% csrf_token %}
+>>>>>>> tmp
             <td>{{forloop.counter}}</td>
             <td>{{cta.banco}}</td>
             <td>{{cta.capini}}</td>
@@ -23,10 +28,25 @@
             <td>{{cta.interes}}</td>
             <td>{{cta.retiros}}</td>
             <td>{{cta.abonos}}</td>
+<<<<<<< HEAD
             <td>{{cta.capital}}</td>          
             <td><input type="number" id="monto" name="num" value="0"></td>
             <td><button><a onclick="obtenermonto({{cta.id_c}})" href="">retirar</a></button></td>
+=======
+            <td>{{cta.capital}}</td>
+            <td><input type="number" name="num"></td>
+       
+            <td>
+                <input onclick="modificarform()" type="submit" value="MODIFICAR">
+                <input onclick="eliminarform()" type="submit" value="ELIMINAR">
+                <input onclick="abonoform()" type="submit" value="ABONAR">
+                <input onclick="retiroform()"  type="submit" value="RETIRAR">
+                
+            </td>
+        
+>>>>>>> tmp
             </tr>
+        </form>
             {% endfor %}
     </table>
 </div>
