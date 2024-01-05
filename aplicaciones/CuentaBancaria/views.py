@@ -69,8 +69,12 @@ def totalabonos(id):
 def operaciones(request):
     list=[]
     com=compra.objects.all()
+    
     for c in com:
+        debitos=compra.objects.filter(score_lt=c.id_compra,id_cuenta=c.id_cuenta)
         c.subtotal=c.cantidad*c.precio_unitario
         c.montopagado=c.id_cuenta.capital-c.subtotal
         list.append(c)
     return render(request,'Operaciones.html',{'compras':list})
+
+
