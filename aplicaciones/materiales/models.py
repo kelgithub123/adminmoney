@@ -6,5 +6,5 @@ class compra(models.Model):
     descripcion=models.CharField(max_length=25,default='No insertada')
     tipo=models.CharField(max_length=20)
     precio_unitario=models.FloatField(max_length=6)
-    cantidad=models.IntegerField(max_length=6,default=0)
+    cantidad=models.IntegerField(default=0)
     id_transaccion=models.ForeignKey(transaccion,on_delete=models.CASCADE,default=0)

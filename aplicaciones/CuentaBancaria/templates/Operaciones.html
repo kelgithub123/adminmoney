@@ -32,7 +32,15 @@
             </td>
             <td>{{t.retiro}}</td>
             <td>{{t.subtotal}}</td>
-            <td>{{t.estadoCapital}}</td>
+            <td>
+                {% if t.estadoCapital %}
+                {{t.estadoCapital}}
+                {% else %}
+                {{t.estadoCap}}
+                {% endif %}
+                
+
+            </td>
             <td></td>       
             <td>
                 <input onclick="modificarform()" type="submit" value="MODIFICAR">

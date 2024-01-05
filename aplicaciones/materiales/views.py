@@ -9,10 +9,10 @@ def compramenu(request):
     cuentas=filtraEstadosCuenta()
     efectiv=efectivo.objects.all()
     suma=0
-    for e in efectiv:
-        suma=e.capital+suma
-    e.capital=suma
-
+    if(efectiv):
+        for e in efectiv:
+            suma=e.capital+suma
+        e.capital=suma
     return render(request,'cotizacion.html',{'cuenta':cuentas,'efectivos':efectiv})
 
 def pagar(request):

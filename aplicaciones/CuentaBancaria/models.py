@@ -27,7 +27,12 @@ class transaccion(models.Model):
         texto="{0}"
         return texto.format(self.id_t)
 
+class billetera(models.Model):
+    id_b=models.AutoField(primary_key=True,default=1)
+    capital=models.FloatField(max_length=6)
+
 class efectivo(models.Model):
-    id_m=models.IntegerField
+    id_m=models.AutoField(primary_key=True,default=0)
     capital=models.FloatField(max_length=6)
     id_trans=models.ForeignKey(transaccion,on_delete=models.CASCADE,default='')
+    id_b=models.ForeignKey(billetera,on_delete=models.CASCADE,default=0)
