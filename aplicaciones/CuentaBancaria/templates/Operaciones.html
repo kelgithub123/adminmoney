@@ -10,21 +10,29 @@
             <th>TOTAL</th>
             <th>ORIGEN CAPITAL</th>    
             <th>CAPITAL</th>
+            <th>RETIRO</th>
             <th>MONTO PAGADO</th>
             <th>ESTADO CAPITAL</th>
             <th>SALDO EN CHEQUERA</th>
         </tr>
-            {% for c in compras %}
+            {% for t in transacciones %}
             <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{c.descripcion}}</td>
-            <td>{{c.cantidad}}</td>
-            <td>{{c.precio_unitario}}</td>
-            <td>{{c.subtotal}}</td>
-            <td>{{c.origen}}</td>
-            <td>{{c.id_cuenta.capital}}</td>
-            <td>{{c.montopagado}}</td>
-            <td></td>
+            <td>{{t.descrip}}</td>
+            <td>{{t.cantidad}}</td>
+            <td>{{t.precioU}}</td>
+            <td>{{t.subtotal}}</td>
+            <td>{{t.origen}}</td>
+            <td>
+                {% if t.capital %}
+                {{t.capital}}
+                {% else %}
+                {{t.id_c.capital}}
+                {% endif %}
+            </td>
+            <td>{{t.retiro}}</td>
+            <td>{{t.subtotal}}</td>
+            <td>{{t.estadoCapital}}</td>
             <td></td>       
             <td>
                 <input onclick="modificarform()" type="submit" value="MODIFICAR">

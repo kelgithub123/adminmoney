@@ -7,7 +7,13 @@ from .carrito import carro
 
 def compramenu(request):
     cuentas=filtraEstadosCuenta()
-    return render(request,'cotizacion.html',{'cuenta':cuentas})
+    efectiv=efectivo.objects.all()
+    suma=0
+    for e in efectiv:
+        suma=e.capital+suma
+    e.capital=suma
+
+    return render(request,'cotizacion.html',{'cuenta':cuentas,'efectivos':efectiv})
 
 def pagar(request):
     id_ct=int(request.POST['id_cta'])

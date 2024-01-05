@@ -21,11 +21,11 @@ class transaccion(models.Model):
     format = fechanow.strftime('%Y'+'-'+'%m'+'-'+'%d')
     retiro=models.FloatField(max_length=6,default=0)
     Abono=models.FloatField(max_length=6,default=0)
-    fecha=models.DateField(default=fechanow,editable=True)
+    fecha=models.DateTimeField(default=datetime.datetime.now(),editable=True)
 
     def __str__(self):
-        texto="{0}'-'{1}"
-        return texto.format(self.id_c.banco,self.retiro)
+        texto="{0}"
+        return texto.format(self.id_t)
 
 class efectivo(models.Model):
     id_m=models.IntegerField

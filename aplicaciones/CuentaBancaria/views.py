@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import *
 from ..materiales.models import *
+import datetime
 # Create your views here.
 def menuRegcuenta(request):    
     return render(request,"registroCuenta.html")
@@ -33,7 +34,7 @@ def listaDecuentas(request):
 
 def retirar(request,idcta):
     monto=request.POST['num']
-    trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=idcta))
+    trans=transaccion.objects.create(retiro=monto,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
     if (trans):
         efect=efectivo.objects.create(capital=monto,id_trans=transaccion.objects.get(id_t=trans.id_t))
     return redirect('/cuentas')
@@ -64,10 +65,33 @@ def totalabonos(id):
 def operaciones(request):
     list=[]
     com=compra.objects.all()
-    for c in com:
-        c.subtotal=c.cantidad*c.precio_unitario
-        c.origen=c.id_transaccion.id_c.banco
-        list.append(c)
-    return render(request,'Operaciones.html',{'compras':list})
+    trans=transaccion.objects.all()
+    for t in trans:
+        acumRet=acumuladoretiros(t.fecha,t.id_c)#paso como parametro la fecha como maximo y la cuenta de la que quiero sacar el historial
+        obj=compra.objects.filter(id_transaccion=t.id_t)  
+        if (obj):
+            print('existe')
+            t.descrip=obj.get(id_transaccion=t.id_t).descripcion
+            t.cantidad=obj.get(id_transaccion=t.id_t).cantidad
+            t.precioU=obj.get(id_transaccion=t.id_t).precio_unitario
+            t.subtotal=t.cantidad*t.precioU
+            t.origen=t.id_c.banco
+            t.capital=t.id_c.capital
+            t.estadoCapital=t.id_c.capital - acumRet
+            list.append(t)
+        else:
+            list.append(t)
+            t.estadoCapital=t.id_c.capital - acumRet
+            t.origen=t.id_c.banco
+    return render(request,'Operaciones.html',{'transacciones':list})
 
-
+def acumuladoretiros(id_f,id_cta):
+    print(id_f)
+    print(id_cta)
+    retiros=transaccion.objects.filter(fecha__lte=id_f,id_c=id_cta)
+    suma=0
+    for ret in retiros:
+        print(ret.retiro)
+        suma=suma+ret.retiro
+        print(suma)
+    return suma
