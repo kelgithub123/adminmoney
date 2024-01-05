@@ -29,11 +29,8 @@ def pagar(request):
         tip=request.POST[postip]
         print('tipo',tip)
         print('------------------------------')
+        monto=cant*precioUnit
         i=i+1
-        tran=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_cuenta=cuenta.objects.get(id_c=id_ct))
+        trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=id_ct))
+        comp=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_transaccion=transaccion.objects.get(id_t=trans.id_t))
     return redirect('/compra')
-
-def agregar_prod(request,producto_id):
-    Carro=carro(request)
-    carro.agregar(producto=producto_id)
-    

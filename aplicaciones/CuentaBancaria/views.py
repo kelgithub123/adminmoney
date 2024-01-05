@@ -35,7 +35,7 @@ def retirar(request,idcta):
     monto=request.POST['num']
     trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=idcta))
     if (trans):
-        efect=efectivo.objects.create(capital=monto,id_cta=cuenta.objects.get(id_c=idcta))
+        efect=efectivo.objects.create(capital=monto,id_trans=transaccion.objects.get(id_t=trans.id_t))
     return redirect('/cuentas')
 
 def abonar(request,idcta):
@@ -45,17 +45,12 @@ def abonar(request,idcta):
 
 def totalretiros(id):
     saldo=transaccion.objects.filter(id_c=id)
-    Compras=compra.objects.filter(id_cuenta=id)
     totalRetiros=0
     totcompras=0
     if (saldo):
         for s in saldo:
-            totalRetiros=s.retiro+totalRetiros
-    if (Compras):    
-        for c in Compras:
-            totcompras=(c.cantidad*c.precio_unitario)+totcompras
-    total=totcompras+totalRetiros;        
-    return total
+            totalRetiros=s.retiro+totalRetiros        
+    return totalRetiros
 
 
 def totalabonos(id):
@@ -69,11 +64,9 @@ def totalabonos(id):
 def operaciones(request):
     list=[]
     com=compra.objects.all()
-    
     for c in com:
-        debitos=compra.objects.filter(score_lt=c.id_compra,id_cuenta=c.id_cuenta)
         c.subtotal=c.cantidad*c.precio_unitario
-        c.montopagado=c.id_cuenta.capital-c.subtotal
+        c.origen=c.id_transaccion.id_c.banco
         list.append(c)
     return render(request,'Operaciones.html',{'compras':list})
 

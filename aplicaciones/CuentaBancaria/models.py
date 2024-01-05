@@ -30,4 +30,4 @@ class transaccion(models.Model):
 class efectivo(models.Model):
     id_m=models.IntegerField
     capital=models.FloatField(max_length=6)
-    id_cta=models.ForeignKey(cuenta,on_delete=models.CASCADE)
+    id_trans=models.ForeignKey(transaccion,on_delete=models.CASCADE,default='')

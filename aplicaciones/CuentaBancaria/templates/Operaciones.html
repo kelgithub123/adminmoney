@@ -21,7 +21,7 @@
             <td>{{c.cantidad}}</td>
             <td>{{c.precio_unitario}}</td>
             <td>{{c.subtotal}}</td>
-            <td>{{c.id_cuenta.banco}}</td>
+            <td>{{c.origen}}</td>
             <td>{{c.id_cuenta.capital}}</td>
             <td>{{c.montopagado}}</td>
             <td></td>
@@ -30,7 +30,6 @@
                 <input onclick="modificarform()" type="submit" value="MODIFICAR">
                 <input onclick="eliminarform()" type="submit" value="ELIMINAR">
             </td>
-        
             </tr>
         </form>
             {% endfor %}
