@@ -33,7 +33,8 @@ def listaDecuentas(request):
 
 def retirar(request,idcta):
     monto=request.POST['num']
-    trans=transaccion.objects.create(retiro=monto,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
+    descr=request.POST['descrip']
+    trans=transaccion.objects.create(retiro=monto,descripcion=descr,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
     #cta=cuenta.objects.get(id_c=idcta)
     #cta.capital=cta.capital-float(monto)
     #cta.save()
@@ -46,7 +47,8 @@ def retirar(request,idcta):
 
 def abonar(request,idcta):
     monto=request.POST['num']
-    trans=transaccion.objects.create(Abono=monto,id_c=cuenta.objects.get(id_c=idcta))
+    descr=request.POST['descrip']
+    trans=transaccion.objects.create(Abono=monto,descripcion=descr,id_c=cuenta.objects.get(id_c=idcta))
     return redirect('/cuentas')
 
 def totalretiros(id):

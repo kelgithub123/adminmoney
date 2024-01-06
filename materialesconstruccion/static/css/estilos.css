@@ -1,8 +1,9 @@
 h1{
-    color:red;
+    color:rgb(6, 6, 136);
     margin-left:40% ;
  font-family: 'Roboto';
 }
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -56,7 +57,16 @@ a.btntabla{
 }
 .contentabla{
     padding: 0px 150px;
+    display: block;
+    width: 100%;
+    overflow-x: auto;
 }
 span{
     background-color: aliceblue;
+}
+button{
+    margin: 15px;
+}
+input{
+    margin: 2px;
 }

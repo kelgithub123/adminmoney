@@ -14,6 +14,7 @@
             <th>ABONO</th>
             <th>MONTO PAGADO</th>
             <th>ESTADO CAPITAL</th>
+            <th>OBSERVACION</th>
             <th>SALDO EN CHEQUERA</th>
         </tr>
             {% for t in transacciones %}
@@ -43,6 +44,7 @@
                 
 
             </td>
+            <td>{{t.descripcion}}</td>
             <td>
                 {{ t.chequera }}
             </td>       
