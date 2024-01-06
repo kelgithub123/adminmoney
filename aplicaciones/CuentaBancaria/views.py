@@ -8,11 +8,10 @@ def menuRegcuenta(request):
 
 def registrarcuenta(request):
     ban= request.POST['banco']
-    cap=request.POST['capital']
     tip=request.POST['tipoDcuenta']
     inter=request.POST['interes']
     fec=request.POST['fecha']
-    cuentas = cuenta.objects.create(banco=ban,capital=cap,tipo=tip,interes=inter,fecha=fec)
+    cuentas = cuenta.objects.create(banco=ban,tipo=tip,interes=inter,fecha=fec)
     return redirect('/')
 
 def filtraEstadosCuenta():
@@ -21,8 +20,8 @@ def filtraEstadosCuenta():
     for ct in cuentas:
         totalr=totalretiros(ct.id_c)
         totala=totalabonos(ct.id_c)
-        ct.capital=ct.capital+totala-totalr
-        ct.capini=ct.capital+totala+totalr
+        ct.capital=totala-totalr
+        ct.capini=totala
         ct.retiros=totalr
         ct.abonos=totala
         listcuentas.append(ct)
@@ -72,6 +71,8 @@ def operaciones(request):
     list=[]
     com=compra.objects.all()
     trans=transaccion.objects.all().order_by('id_c')
+    capitalAntBanco=0
+    capitalAnterior=0
     for t in trans: 
             obj=compra.objects.filter(id_transaccion=t.id_t)  
             if (obj):
@@ -84,23 +85,38 @@ def operaciones(request):
                     acumRet=acumuladoretiros(t.id_t,t.id_c)#paso como parametro la fecha como maximo y la cuenta de la que quiero sacar el historial
                     acumAbo=acumuladoAbonos(t.id_t,t.id_c)
                     t.origen=t.id_c.banco
-                    t.capital=t.id_c.capital
-                    t.estadoCapital=t.id_c.capital - acumRet + acumAbo
+                    t.capital=capitalAntBanco
+                    t.estadoCapital= acumAbo - acumRet
+                    capitalAntBanco=t.estadoCapital
                 elif(t.id_bill):
                     acumRet=pagosbilletera(t.id_t,t.id_bill)
-                    acumAbo=pagosbilletera(t.id_t,t.id_bill)
+                    acumAbo=abonosbilletera(t.id_t,t.id_bill)
                     t.origen=t.id_bill.id_b
                     if(t.origen==7):
-                        t.origen="CHEQUERA"
+                        t.origen= "-> BILLETERA"
                     capital=AbonosBilletera()
-                    t.capital=capital
-                    t.chequera=t.capital- acumRet 
+                    t.capital=capitalAnterior
+                    t.chequera= acumAbo - acumRet
+                    capitalAnterior=t.chequera
                 list.append(t)
             elif(t.id_c):
                 acumRet=acumuladoretiros(t.id_t,t.id_c)            
-                t.estadoCap=t.id_c.capital - acumRet
+                acumAbo=acumuladoAbonos(t.id_t,t.id_c)
                 t.origen=t.id_c.banco
-                list.append(t)              
+                t.capital=capitalAntBanco 
+                t.estadoCapital= acumAbo - acumRet
+                capitalAntBanco=t.estadoCapital
+                list.append(t)
+            elif(t.id_bill):
+                    acumRet=pagosbilletera(t.id_t,t.id_bill)
+                    acumAbo=abonosbilletera(t.id_t,t.id_bill)
+                    t.origen=t.id_bill.id_b
+                    if(t.origen==7):
+                        t.origen="CHEQUERA"
+                    t.capital=capitalAnterior    
+                    t.chequera= acumAbo - acumRet
+                    capitalAnterior=t.chequera 
+                    list.append(t)               
     return render(request,'Operaciones.html',{'transacciones':list})
 
 def acumuladoretiros(id_t,id_cta):
