@@ -47,13 +47,11 @@
             <td><input type="submit" onclick="obtener(this.value)" name="id_cta" value={{c.id_c}}></td>        
         </tr>
         {% endfor %}
-        {% for e in efectivos %}
         <tr>
             <td>efectivo</td>
-            <td>{{e.capital}}</td>
-            <td><input type="submit" onclick="obtener(this.value)" name="id_cta" value={{e.id_m}}></td>
+            <td>{{e.cap}}</td>
+            <td><input type="submit" onclick="obtener(this.value)" name="id_cta" value={{e.id_b}}></td>
         </tr>
-        {% endfor %}
     </table>
     <input type="hidden" id="banco" value="id banco">
     <input type="hidden" id="num" name="num" value="1">

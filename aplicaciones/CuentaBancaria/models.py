@@ -14,9 +14,15 @@ class cuenta(models.Model):
         texto = "{0}{1}{2}"
         return texto.format(self.banco,self.capital,self.id_c)
 
+
+class billetera(models.Model):
+    id_b=models.AutoField(primary_key=True,default=7)
+    capital=models.FloatField(max_length=6)
+
 class transaccion(models.Model):
     id_t=models.AutoField(primary_key=True)
-    id_c=models.ForeignKey(cuenta,on_delete=models.CASCADE,default=0)
+    id_c=models.ForeignKey(cuenta,on_delete=models.CASCADE,null=True)
+    id_bill=models.ForeignKey(billetera,on_delete=models.CASCADE,null=True)
     fechanow=datetime.date.today()
     format = fechanow.strftime('%Y'+'-'+'%m'+'-'+'%d')
     retiro=models.FloatField(max_length=6,default=0)
@@ -26,13 +32,3 @@ class transaccion(models.Model):
     def __str__(self):
         texto="{0}"
         return texto.format(self.id_t)
-
-class billetera(models.Model):
-    id_b=models.AutoField(primary_key=True,default=1)
-    capital=models.FloatField(max_length=6)
-
-class efectivo(models.Model):
-    id_m=models.AutoField(primary_key=True,default=0)
-    capital=models.FloatField(max_length=6)
-    id_trans=models.ForeignKey(transaccion,on_delete=models.CASCADE,default='')
-    id_b=models.ForeignKey(billetera,on_delete=models.CASCADE,default=0)
