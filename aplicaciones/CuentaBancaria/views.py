@@ -112,7 +112,7 @@ def operaciones(request):
                     acumAbo=abonosbilletera(t.id_t,t.id_bill)
                     t.origen=t.id_bill.id_b
                     if(t.origen==7):
-                        t.origen="CHEQUERA"
+                        t.origen="BILLETERA"
                     t.capital=capitalAnterior    
                     t.chequera= acumAbo - acumRet
                     capitalAnterior=t.chequera 
