@@ -39,7 +39,7 @@ def retirar(request,idcta):
     #cta.capital=cta.capital-float(monto)
     #cta.save()
     if (trans):
-        efect=transaccion.objects.create(Abono=monto,id_bill=billetera.objects.get(id_b=7))
+        efect=transaccion.objects.create(Abono=monto,descripcion="retiro efectivo billetera",id_bill=billetera.objects.get(id_b=7))
         #bill=billetera.objects.get(id_b=7)
         #bill.capital=bill.capital+float(monto)
         #bill.save()

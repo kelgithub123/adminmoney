@@ -26,7 +26,7 @@ class transaccion(models.Model):
     format = fechanow.strftime('%Y'+'-'+'%m'+'-'+'%d')
     retiro=models.FloatField(max_length=6,default=0)
     Abono=models.FloatField(max_length=6,default=0)
-    descripcion=models.CharField(max_length=30,default='transaccion por compra')
+    descripcion=models.CharField(max_length=30,default='No especificada')
     fecha=models.DateTimeField(default=datetime.datetime.now(),editable=True)
 
     def __str__(self):

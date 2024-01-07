@@ -42,7 +42,7 @@ def pagoTransaccion(request,id_ct,num):
         print('------------------------------')
         monto=cant*precioUnit
         i=i+1
-        trans=transaccion.objects.create(retiro=monto,id_c=cuenta.objects.get(id_c=id_ct))
+        trans=transaccion.objects.create(retiro=monto,descripcion="transac. compras/otros",id_c=cuenta.objects.get(id_c=id_ct))
         comp=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_transaccion=transaccion.objects.get(id_t=trans.id_t))
     
 
@@ -78,6 +78,6 @@ def pagarEfectivo(request,id_ct,num):
         print('------------------------------')
         monto=cant*precioUnit
         i=i+1
-        trans=transaccion.objects.create(retiro=monto,id_bill=billetera.objects.get(id_b=id_bi))
+        trans=transaccion.objects.create(retiro=monto,descripcion="transac. compras/otros",id_bill=billetera.objects.get(id_b=id_bi))
         comp=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_transaccion=transaccion.objects.get(id_t=trans.id_t))
     
