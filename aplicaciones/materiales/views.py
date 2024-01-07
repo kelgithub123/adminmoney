@@ -5,6 +5,7 @@ from .models import *
 from .carrito import carro
 # Create your views here.
 
+
 def compramenu(request):
     cuentas=filtraEstadosCuenta()
     bill=billetera.objects.get(id_b=7)
@@ -33,7 +34,7 @@ def pagoTransaccion(request,id_ct,num):
         print('------------------------------')
         descrip=request.POST[postdes]
         print('descripcion',descrip)
-        cant=int(request.POST[postcan])
+        cant=float(request.POST[postcan])
         print('cantidad',cant)
         precioUnit=float(request.POST[postpr])
         print('precio',precioUnit)

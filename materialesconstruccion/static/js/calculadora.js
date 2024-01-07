@@ -17,8 +17,8 @@ function calcularSubtotal(){
     let subtotal=document.querySelectorAll(".subtotal");
     let total=0;
         for(var i=0;i<=costounit.length-1;i++){
-            subtotal[i].value=costounit[i].value*cantidad[i].value;  
-                }
+            subtotal[i].value= costounit[i].value*cantidad[i].value;        
+        }
     calculototal();
                 
     }
@@ -28,7 +28,7 @@ function calcularSubtotal(){
     let subtotal=document.querySelectorAll(".subtotal");
     let total=0;
         for(var i=0;i<=costounit.length-1;i++){  
-                costounit[i].value=subtotal[i].value / cantidad[i].value;    
+                costounit[i].value=Number((subtotal[i].value / cantidad[i].value).toFixed(2));    
         }
         calculototal();          
     }
@@ -82,6 +82,16 @@ function calcularSubtotal(){
             console.log(refer.action);
         });
     }
+    function transferirform(){
+        formulario=document.getElementsByClassName('formulario');
+        Array.from(formulario).forEach(function(refer){
+            console.log(refer.action);
+            lnk=refer.action;
+            id=lnk.substr(-1);
+            refer.action='transferir/'+id;
+            console.log(refer.action);
+        });
+    }
 
 
     function addfila(){
@@ -117,7 +127,6 @@ function calcularSubtotal(){
         inputsubtotal.addEventListener('change', calcularcostounit);
         subtotal=document.createElement('td');
         subtotal.appendChild(inputsubtotal);
-    
         fila=document.createElement('tr');
         fila.appendChild(descrip);
         fila.appendChild(cantidad);

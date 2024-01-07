@@ -1,10 +1,16 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from .models import *
 from ..materiales.models import *
 import datetime
 # Create your views here.
 def menuRegcuenta(request):    
     return render(request,"registroCuenta.html")
+
+def eliminarTrans(request,id_tr):
+    tr=transaccion.objects.get(id_t=id_tr)
+    tr.delete()
+    return redirect('/operaciones')
 
 def registrarcuenta(request):
     ban= request.POST['banco']
@@ -31,6 +37,12 @@ def listaDecuentas(request):
     ctafil=filtraEstadosCuenta
     return render(request,"ListaDcuentas.html",{"cuentas":ctafil})
 
+def transferir(request,idcta):
+    monto=request.POST['num']
+    descr=request.POST['descrip']
+    trans=transaccion.objects.create(retiro=monto,descripcion=descr,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
+    return redirect('/cuentas')
+
 def retirar(request,idcta):
     monto=request.POST['num']
     descr=request.POST['descrip']
@@ -38,6 +50,7 @@ def retirar(request,idcta):
     #cta=cuenta.objects.get(id_c=idcta)
     #cta.capital=cta.capital-float(monto)
     #cta.save()
+    
     if (trans):
         efect=transaccion.objects.create(Abono=monto,descripcion="retiro efectivo billetera",id_bill=billetera.objects.get(id_b=7))
         #bill=billetera.objects.get(id_b=7)
@@ -102,8 +115,8 @@ def operaciones(request):
                     capitalAnterior=t.chequera
                 list.append(t)
             elif(t.id_c):
-                acumRet=acumuladoretiros(t.id_t,t.id_c)            
-                acumAbo=acumuladoAbonos(t.id_t,t.id_c)
+                acumRet=acumuladoretiros(t.id_t,t.id_c) #filtra y suma retiros hasta la fecha incluyendo el actual           
+                acumAbo=acumuladoAbonos(t.id_t,t.id_c) #filtra y suma abonos hasta la fecha incluyendo el actual
                 t.origen=t.id_c.banco
                 t.capital=capitalAntBanco 
                 t.estadoCapital= acumAbo - acumRet

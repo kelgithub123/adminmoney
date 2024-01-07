@@ -103,7 +103,7 @@ background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%
 }
 .navul{
     background-color: rgb(13, 13, 14);
-    padding: 20px;
+    padding: 10px;
     margin-top: 0px;
 }
 .nava{
@@ -111,14 +111,16 @@ background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%
     text-decoration:none;
 }
 .reginput{
-    margin: 20px;
+    margin: 10px;
 }
 .regul{
     list-style: none;
 }
+
 a.btntabla{
     text-decoration:none;
-}
+    margin: 5px 0px;
+  }
 .contentabla{
     /* padding: 0px 150px; */
     display: block;
@@ -129,7 +131,7 @@ span{
     background-color: aliceblue;
 }
 button{
-    margin: 15px;
+    margin: 5px;
 }
 input{
     margin: 2px;
