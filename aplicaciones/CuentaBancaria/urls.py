@@ -9,5 +9,7 @@ urlpatterns = [
     path('abono/<idcta>',views.abonar),
     path('transferir/<idcta>',views.transferir),
     path('eliminarTrans/<id_tr>',views.eliminarTrans),
+    path('editaOperacion/<id_tr>',views.edicionTransaccion),
+    path('editarTrans/<id_tr>',views.editarTrans),
     path('operaciones',views.operaciones)    
 ]

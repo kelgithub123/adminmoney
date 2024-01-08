@@ -1,0 +1,34 @@
+{% extends "encabezado.html" %}
+{% block contenido %}
+<div class="login-box">
+<h2>Edición de Curso</h2>
+                <form action="/editarTrans/{{operacion.id_t}}" method="POST">{% csrf_token %}
+                    <div class="user-box">
+                        
+                        <input type="text" id="" name="retiro" value="{{operacion.retiro}}" class="form-control" placeholder="" value="0"
+                            required>
+                            <label for="">RETIRO</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" id="" name="abono" value="{{operacion.Abono}}"  >
+                            <label for="">ABONO</label>
+                    </div>
+                    <div class="user-box">
+                        
+                        <input type="text" id="" name="descripcion" value="{{operacion.descripcion}}" class="form-control"
+                            value="1" required>
+                            <label for="">DESCRIPCION</label>
+                    </div>
+                    <div class="user-box">  
+                        <input type="datetime-local" id="" name="fechaHora" value="{{operacion.fecha}}" class="form-control" min="1" max="9"
+                            value="1" required>
+                            <label for="">FECHA Y HORA</label>
+                    </div>
+                    <div class="user-box">
+                        <label for=""></label>
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+      
+{% endblock %}

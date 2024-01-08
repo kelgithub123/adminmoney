@@ -1,23 +1,31 @@
 {% extends "encabezado.html" %}
 {% block contenido %}
+<div class="login-box">
+    <h2>REGISTRO DE CUENTA</h2>
 <form action="../RegCuentas" method="POST">{% csrf_token %}
-    <ul class="regul">
-        <li class="regli"><label for="">banco</label>
-            <input name='banco' class="reginput" type="text"></li>
-        <li class="regli"><label for="">tipo</label>
-            <select class="regselect" name="tipoDcuenta" id="">
+        <div class="user-box"> 
+            <label for="">TIPO</label>
+                <select class="regselect" name="tipoDcuenta" id="">
                 <option class="regoption" value="ahorro">ahorro</option>
                 <option class="regoption" value="corriente" selected >corriente</option>
                 <option class="regoption" value="debito">debito</option>
-            </select>
-            </li>
-        <li class="regli"><label for="">interes</label>
+                </select>
+        </div>
+        <br><br>
+        <div class="user-box">
+        <label for="">BANCO</label>
+            <input name='banco' class="reginput" type="text">
+        </div>
+        
+            <div class="user-box">
+            <label for="">INTERES</label>
             <input name='interes' step="0.001" class="reginput" type="number">
-            </li>
-         <li>
-            <input type="date" name="fecha" id="">
-         </li>   
-    </ul>
-    <input type="submit" value="enviar">
+    </div>
+    <div class="user-box">
+            <label for="">FECHA</label>
+            <input type="date" name="fecha" id="">           
+    </div>
+    <button type="submit">GUARDAR</button>
 </form>
+</div>
 {% endblock  %}

@@ -22,8 +22,6 @@ class transaccion(models.Model):
     id_t=models.AutoField(primary_key=True)
     id_c=models.ForeignKey(cuenta,on_delete=models.CASCADE,null=True)
     id_bill=models.ForeignKey(billetera,on_delete=models.CASCADE,null=True)
-    fechanow=datetime.date.today()
-    format = fechanow.strftime('%Y'+'-'+'%m'+'-'+'%d')
     retiro=models.FloatField(max_length=6,default=0)
     Abono=models.FloatField(max_length=6,default=0)
     descripcion=models.CharField(max_length=30,default='No especificada')

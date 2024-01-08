@@ -182,3 +182,21 @@ def AbonosBilletera():
             suma=tr.Abono+suma
     total=suma
     return total
+
+def edicionTransaccion(request, id_tr):
+    operacion = transaccion.objects.get(id_t=id_tr)
+    return render(request, "editaroperacion.html", {"operacion": operacion})
+
+def editarTrans(request,id_tr):
+    #id_tr=request.GET['retiro']
+    retiro = request.POST['retiro']
+    abono = request.POST['abono']
+    descrip=request.POST['descripcion']
+    fecha = request.POST['fechaHora']
+    trans = transaccion.objects.get(id_t=id_tr)
+    trans.retiro = retiro
+    trans.Abono = abono
+    trans.descripcion = descrip
+    trans.fecha = fecha
+    trans.save()
+    return redirect('/operaciones')
