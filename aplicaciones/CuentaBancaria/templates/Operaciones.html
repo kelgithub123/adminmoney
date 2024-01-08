@@ -14,8 +14,9 @@
             <th>ABONO</th>
             <th>MONTO PAGADO</th>
             <th>ESTADO CAPITAL</th>
-            <th>OBSERVACION</th>
             <th>SALDO EN CHEQUERA</th>
+            <th>OBSERVACION</th>
+            <th>FECHA</th>
             <th>TAREAS</th>
         </tr>
             {% for t in transacciones %}
@@ -42,20 +43,20 @@
                 {% else %}
                 {{t.estadoCap}}
                 {% endif %}
-                
-
             </td>
-            <td>{{t.descripcion}}</td>
             <td>
                 {{ t.chequera }}
             </td>       
+            <td>{{t.descripcion}}</td>
+            <td>{{t.fecha}}</td>
             <td>
                <button><a class="btntabla" href="eliminarTrans/{{t.id_t}}">ELIMINAR</a></button>
-               <button><a class="btntabla" href="modificarTrans/{{t.id_t}}">MODIFICAR</a></button>
+               <button id="myBtn" >MODIFICAR</button>
             </td>
             </tr>
         </form>
             {% endfor %}
     </table>
+ 
 </div>
 {% endblock  %}
