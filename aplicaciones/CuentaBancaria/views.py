@@ -88,7 +88,7 @@ def compraEfectivo(request):
             c.fecha=c.id_transaccion.fecha    
             capitalAnterior=c.chequera
             list.append(c)               
-    return render(request,'ComprasEfectivo.html',{'transacciones':list})
+    return render(request,'comprasEfectivo.html',{'transacciones':list})
 
 def operaciones(request):
     list=[]
