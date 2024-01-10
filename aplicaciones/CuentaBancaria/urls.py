@@ -11,5 +11,6 @@ urlpatterns = [
     path('eliminarTrans/<id_tr>',views.eliminarTrans),
     path('editaOperacion/<id_tr>',views.edicionTransaccion),
     path('editarTrans/<id_tr>',views.editarTrans),
-    path('operaciones',views.operaciones)    
+    path('operaciones',views.operaciones),
+    path('compraEfectivo',views.compraEfectivo)   
 ]

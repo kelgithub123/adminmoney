@@ -1,0 +1,40 @@
+{% extends "encabezado.html" %}
+{% block contenido %}
+<div class='contentabla'>
+    <table>
+        <tr>
+            <th>Nro</th>
+            <th>DESCRIPCION</th>
+            <th>CANTIDAD</th>
+            <th>COSTO/U</th>
+            <th>TOTAL</th>
+            <th>EFECT DISP</th>    
+            <th>PAGO</th>
+            <th>SALDO DISP</th>
+            <th>OBSERVACION</th>
+            <th>FECHA</th>
+            <th>TAREAS</th>
+        </tr>
+            {% for t in transacciones %}
+            <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{t.descripcion}}</td>
+            <td>{{t.cantidad}}</td>
+            <td>{{t.precio_unitario}}</td>
+            <td>{{t.subtotal}}</td>
+            <td>{{t.capital}}</td>
+            <td>{{t.retiro}}</td>
+            <td>{{t.chequera}}</td>
+            <td>{{t.descripcion}}</td>
+            <td>{{t.fecha}}</td>
+            <td>
+               <button><a class="btntabla" href="eliminarTrans/{{t.id_t}}">🗑️</a></button>
+               <button><a class="btntabla" href="editaOperacion/{{t.id_t}}">🖊️</a></button>
+            </td>
+            </tr>
+        </form>
+            {% endfor %}
+    </table>
+ 
+</div>
+{% endblock  %}

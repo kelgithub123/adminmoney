@@ -82,6 +82,22 @@ def totalabonos(id):
             total=s.Abono+total
     return total
 
+def compraEfectivo(request):
+    list=[]
+    com=compra.objects.all()
+    capitalAnterior=AbonosBilletera()
+    for c in com:
+        if(c.id_transaccion.id_bill):
+            acumRet=pagosbilletera(c.id_transaccion.id_t,c.id_transaccion.id_bill)
+            acumAbo=abonosbilletera(c.id_transaccion.id_t,c.id_transaccion.id_bill)     
+            c.retiro=c.id_transaccion.retiro
+            c.subtotal=c.cantidad*c.precio_unitario
+            c.capital=capitalAnterior
+            c.chequera= c.capital - acumRet
+            capitalAnterior=c.chequera
+            list.append(c)               
+    return render(request,'ComprasEfectivo.html',{'transacciones':list})
+
 def operaciones(request):
     list=[]
     com=compra.objects.all()
@@ -127,7 +143,7 @@ def operaciones(request):
                     acumAbo=abonosbilletera(t.id_t,t.id_bill)
                     t.origen=t.id_bill.id_b
                     if(t.origen==7):
-                        t.origen="BILLETERA"
+                        t.origen="EFECTIVO"
                     t.capital=capitalAnterior    
                     t.chequera= acumAbo - acumRet
                     capitalAnterior=t.chequera 
