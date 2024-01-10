@@ -47,15 +47,8 @@ def retirar(request,idcta):
     monto=request.POST['num']
     descr=request.POST['descrip']
     trans=transaccion.objects.create(retiro=monto,descripcion=descr,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
-    #cta=cuenta.objects.get(id_c=idcta)
-    #cta.capital=cta.capital-float(monto)
-    #cta.save()
-    
     if (trans):
-        efect=transaccion.objects.create(Abono=monto,descripcion="retiro efectivo billetera",id_bill=billetera.objects.get(id_b=7))
-        #bill=billetera.objects.get(id_b=7)
-        #bill.capital=bill.capital+float(monto)
-        #bill.save()
+        efect=transaccion.objects.create(Abono=monto,descripcion="ingreso efectivo",id_bill=billetera.objects.get(id_b=7))
     return redirect('/cuentas')
 
 def abonar(request,idcta):
@@ -87,67 +80,30 @@ def compraEfectivo(request):
     com=compra.objects.all()
     capitalAnterior=AbonosBilletera()
     for c in com:
-        if(c.id_transaccion.id_bill):
-            acumRet=pagosbilletera(c.id_transaccion.id_t,c.id_transaccion.id_bill)
-            acumAbo=abonosbilletera(c.id_transaccion.id_t,c.id_transaccion.id_bill)     
+        if(c.id_transaccion.id_bill):    
             c.retiro=c.id_transaccion.retiro
             c.subtotal=c.cantidad*c.precio_unitario
             c.capital=capitalAnterior
-            c.chequera= c.capital - acumRet
+            c.chequera= c.capital - c.subtotal
+            c.fecha=c.id_transaccion.fecha    
             capitalAnterior=c.chequera
             list.append(c)               
     return render(request,'ComprasEfectivo.html',{'transacciones':list})
 
 def operaciones(request):
     list=[]
-    com=compra.objects.all()
     trans=transaccion.objects.all().order_by('id_c')
     capitalAntBanco=0
     capitalAnterior=0
     for t in trans: 
-            obj=compra.objects.filter(id_transaccion=t.id_t)  
-            if (obj):
-                print('existe')
-                t.descrip=obj.get(id_transaccion=t.id_t).descripcion
-                t.cantidad=obj.get(id_transaccion=t.id_t).cantidad
-                t.precioU=obj.get(id_transaccion=t.id_t).precio_unitario
-                t.subtotal=t.cantidad*t.precioU
-                if(t.id_c):
-                    acumRet=acumuladoretiros(t.id_t,t.id_c)#paso como parametro la fecha como maximo y la cuenta de la que quiero sacar el historial
-                    acumAbo=acumuladoAbonos(t.id_t,t.id_c)
-                    t.origen=t.id_c.banco
-                    t.capital=capitalAntBanco
-                    t.estadoCapital= acumAbo - acumRet
-                    capitalAntBanco=t.estadoCapital
-                elif(t.id_bill):
-                    acumRet=pagosbilletera(t.id_t,t.id_bill)
-                    acumAbo=abonosbilletera(t.id_t,t.id_bill)
-                    t.origen=t.id_bill.id_b
-                    if(t.origen==7):
-                        t.origen= "-> BILLETERA"
-                    capital=AbonosBilletera()
-                    t.capital=capitalAnterior
-                    t.chequera= acumAbo - acumRet
-                    capitalAnterior=t.chequera
-                list.append(t)
-            elif(t.id_c):
+            if(t.id_c):
                 acumRet=acumuladoretiros(t.id_t,t.id_c) #filtra y suma retiros hasta la fecha incluyendo el actual           
                 acumAbo=acumuladoAbonos(t.id_t,t.id_c) #filtra y suma abonos hasta la fecha incluyendo el actual
                 t.origen=t.id_c.banco
                 t.capital=capitalAntBanco 
                 t.estadoCapital= acumAbo - acumRet
                 capitalAntBanco=t.estadoCapital
-                list.append(t)
-            elif(t.id_bill):
-                    acumRet=pagosbilletera(t.id_t,t.id_bill)
-                    acumAbo=abonosbilletera(t.id_t,t.id_bill)
-                    t.origen=t.id_bill.id_b
-                    if(t.origen==7):
-                        t.origen="EFECTIVO"
-                    t.capital=capitalAnterior    
-                    t.chequera= acumAbo - acumRet
-                    capitalAnterior=t.chequera 
-                    list.append(t)               
+                list.append(t)           
     return render(request,'Operaciones.html',{'transacciones':list})
 
 def acumuladoretiros(id_t,id_cta):

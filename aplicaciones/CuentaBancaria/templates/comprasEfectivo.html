@@ -2,6 +2,7 @@
 {% block contenido %}
 <div class='contentabla'>
     <table>
+        <thead>
         <tr>
             <th>Nro</th>
             <th>DESCRIPCION</th>
@@ -15,25 +16,28 @@
             <th>FECHA</th>
             <th>TAREAS</th>
         </tr>
+    </thead>
+    <tbody>
             {% for t in transacciones %}
             <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{t.descripcion}}</td>
-            <td>{{t.cantidad}}</td>
-            <td>{{t.precio_unitario}}</td>
-            <td>{{t.subtotal}}</td>
-            <td>{{t.capital}}</td>
-            <td>{{t.retiro}}</td>
-            <td>{{t.chequera}}</td>
-            <td>{{t.descripcion}}</td>
-            <td>{{t.fecha}}</td>
-            <td>
+            <td data-label="Nro">{{forloop.counter}}</td>
+            <td data-label="DESCRIPCION">{{t.descripcion}}</td>
+            <td data-label="CANTIDAD">{{t.cantidad}}</td>
+            <td data-label="COSTO/U">{{t.precio_unitario}}</td>
+            <td data-label="TOTAL">{{t.subtotal}}</td>
+            <td data-label="EFECT DISP">{{t.capital}}</td>
+            <td data-label="PAGO">{{t.retiro}}</td>
+            <td data-label="SALDO DISP">{{t.chequera}}</td>
+            <td data-label="OBSERVACION">{{t.descripcion}}</td>
+            <td data-label="FECHA">{{t.fecha}}</td>
+            <td data-label="TAREAS">
                <button><a class="btntabla" href="eliminarTrans/{{t.id_t}}">🗑️</a></button>
                <button><a class="btntabla" href="editaOperacion/{{t.id_t}}">🖊️</a></button>
             </td>
             </tr>
         </form>
             {% endfor %}
+        </tbody>
     </table>
  
 </div>

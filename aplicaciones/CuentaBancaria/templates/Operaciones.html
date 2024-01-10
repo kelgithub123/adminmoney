@@ -2,61 +2,52 @@
 {% block contenido %}
 <div class='contentabla'>
     <table>
+        <thead>
         <tr>
             <th>Nro</th>
-            <th>DESCRIPCION</th>
-            <th>CANTIDAD</th>
-            <th>COSTO/U</th>
-            <th>TOTAL</th>
             <th>ORIGEN CAPITAL</th>    
             <th>CAPITAL</th>
             <th>RETIRO</th>
             <th>ABONO</th>
-            <th>MONTO PAGADO</th>
             <th>ESTADO CAPITAL</th>
-            <th>SALDO EN CHEQUERA</th>
-            <th>OBSERVACION</th>
+            <th>DETALLE</th>
             <th>FECHA</th>
             <th>TAREAS</th>
         </tr>
+    </thead>
+    <tbody>
             {% for t in transacciones %}
             <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{t.descripcion}}</td>
-            <td>{{t.cantidad}}</td>
-            <td>{{t.precioU}}</td>
-            <td>{{t.subtotal}}</td>
-            <td>{{t.origen}}</td>
-            <td>
+            <td data-label="Nro">{{forloop.counter}}</td>
+            <td data-label="ORIGEN CAPITAL">{{t.origen}}</td>
+            <td data-label="CAPITAL">
                 {% if t.capital %}
                 {{t.capital}}
                 {% else %}
                 {{t.id_c.capital}}
                 {% endif %}
             </td>
-            <td>{{t.retiro}}</td>
-            <td>{{t.Abono}}</td>
-            <td>{{t.subtotal}}</td>
-            <td>
+            <td data-label="RETIRO">{{t.retiro}}</td>
+            <td data-label="ABONO">{{t.Abono}}</td>
+
+            <td data-label="ESTADO CAPITAL">
                 {% if t.estadoCapital %}
                 {{t.estadoCapital}}
                 {% else %}
                 {{t.estadoCap}}
                 {% endif %}
-            </td>
-            <td>
-                {{ t.chequera }}
-            </td>       
-            <td>{{t.descripcion}}</td>
-            <td>{{t.fecha}}</td>
-            <td>
+            </td> 
+            <td data-label="DETALLE">{{t.descripcion}}</td>
+            <td data-label="FECHA">{{t.fecha}}</td>
+            <td data-label="TAREAS">
                <button><a class="btntabla" href="eliminarTrans/{{t.id_t}}">ELIMINAR</a></button>
                <button><a class="btntabla" href="editaOperacion/{{t.id_t}}">EDITAR</a></button>
             </td>
             </tr>
         </form>
             {% endfor %}
-    </table>
+        </tbody>
+        </table>
  
 </div>
 {% endblock  %}

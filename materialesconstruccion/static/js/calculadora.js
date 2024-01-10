@@ -99,6 +99,7 @@ function calcularSubtotal(){
         inputdescr=document.createElement('input');
         descrip=document.createElement('td');
         inputdescr.setAttribute('name','descrip'+(i));
+        descrip.setAttribute('data-label','DESCRIPCION');
         descrip.appendChild(inputdescr);
     
         inputcantidad=document.createElement('input');
@@ -106,6 +107,7 @@ function calcularSubtotal(){
         inputcantidad.classList.add('cantidad');
         inputcantidad.addEventListener('change', calculototal)
         cantidad=document.createElement('td');
+        cantidad.setAttribute('data-label','CANTIDAD');
         cantidad.appendChild(inputcantidad);
     
         inputcosto=document.createElement('input');
@@ -113,9 +115,11 @@ function calcularSubtotal(){
         inputcosto.setAttribute('name','costoUnit'+(i));
         inputcosto.addEventListener('change', calcularSubtotal);
         costo=document.createElement('td');
+        costo.setAttribute('data-label','COSTO UNIT');
         costo.appendChild(inputcosto);
 
         tipo=document.createElement('td');
+        tipo.setAttribute('data-label','TIPO');
         tipo.innerHTML=`<select name="tipo`+(i)+`" id="">
         <option value="construccion">construccion</option>
         <option value="alimentacion">alimentacion</option>
@@ -123,10 +127,12 @@ function calcularSubtotal(){
         </select>`;
         
         inputsubtotal=document.createElement('input');
+        
         inputsubtotal.classList.add('subtotal');
         inputsubtotal.addEventListener('change', calcularcostounit);
         subtotal=document.createElement('td');
         subtotal.appendChild(inputsubtotal);
+        subtotal.setAttribute('data-label','SUBTOTAL');
         fila=document.createElement('tr');
         fila.appendChild(descrip);
         fila.appendChild(cantidad);

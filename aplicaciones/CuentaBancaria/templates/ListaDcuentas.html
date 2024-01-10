@@ -2,6 +2,7 @@
 {% block contenido %}
 <div class='contentabla' >
     <table>
+        <thead>
         <tr>
             <th>Nro</th>
             <th>BANCO</th>
@@ -15,20 +16,22 @@
             <th>DESCRIPCION</th>
             <th>ACCIONES</th>
         </tr>
+    </thead>
+    <tbody>
             {% for cta in cuentas %}
             <tr>
             <form class="formulario" action="{{cta.id_c}}" method="post"> {% csrf_token %}
-            <td>{{forloop.counter}}</td>
-            <td>{{cta.banco}}</td>
-            <td>{{cta.capini}}</td>
-            <td>{{cta.tipo}}</td>
-            <td>{{cta.interes}}</td>
-            <td>{{cta.retiros}}</td>
-            <td>{{cta.abonos}}</td>
-            <td>{{cta.capital}}</td>
-            <td><input type="number" name="num"></td>
-            <td><input type="text" name="descrip" id=""></td>
-            <td>
+            <td data-label="Nro">{{forloop.counter}}</td>
+            <td data-label="BANCO">{{cta.banco}}</td>
+            <td data-label="CAPITAL">{{cta.capini}}</td>
+            <td data-label="TIPO">{{cta.tipo}}</td>
+            <td data-label="INTERES">{{cta.interes}}</td>
+            <td data-label="RETIROS">{{cta.retiros}}</td>
+            <td data-label="ABONOS">{{cta.abonos}}</td>
+            <td data-label="SALDO ACTUAL">{{cta.capital}}</td>
+            <td data-label="MONTO A OPERAR"><input type="number" name="num"></td>
+            <td data-label="DESCRIPCION"><input type="text" name="descrip" id=""></td>
+            <td data-label="ACCIONES">
                 <input class="btntabla" onclick="modificarform()" type="submit" value="MODIFICAR">
                 <input class="btntabla" onclick="eliminarform()" type="submit" value="ELIMINAR">
                 <input class="btntabla" onclick="abonoform()" type="submit" value="ABONAR">
@@ -39,6 +42,7 @@
             </tr>
         </form>
             {% endfor %}
+        </tbody>
     </table>
 </div>
 {% endblock  %}
