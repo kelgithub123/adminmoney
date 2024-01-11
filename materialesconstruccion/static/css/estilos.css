@@ -112,12 +112,14 @@ h1{
 
     table thead {
       display: none;
+      font-size:x-large;
     }
 
     table tr {
       margin-bottom: 10px;
       display: block;
       border-bottom: 2px solid #ddd;
+      font-size:x-large;
     }
 
     table td {
@@ -136,14 +138,12 @@ h1{
       float: left;
       text-transform: uppercase;
       font-weight: bold;
-    }
-  }
-
-
+    }}
 
 body{
     background: rgb(61,94,221);
 background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%); 
+font-size:x-large;
 }
 .navli{
     display:inline;
@@ -152,19 +152,22 @@ background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%
     color: black;
     padding: 0px 20px;
     border-radius: 5px;
-    
+    font-size:x-large;
 }
 .navul{
     background-color: rgb(13, 13, 14);
     padding: 10px;
     margin-top: 0px;
+    font-size:x-large;
 }
 .nava{
     color: rgb(158, 22, 22);
     text-decoration:none;
+    font-size:x-large;
 }
 .reginput{
     margin: 10px;
+    font-size:x-large;
 }
 .regul{
     list-style: none;
@@ -173,12 +176,14 @@ background: radial-gradient(circle, rgba(61,94,221,1) 20%, rgba(57,55,214,1) 67%
 a.btntabla{
     text-decoration:none;
     margin: 5px 0px;
+    font-size:x-large;
   }
 .contentabla{
     /* padding: 0px 150px; */
     display: block;
     width: 100%;
     overflow-x: auto;
+    font-size:x-large;
 }
 span{
     background-color: aliceblue;
@@ -188,6 +193,7 @@ button{
 }
 input{
     margin: 2px;
+    font-size:x-large;
 }
 
 .login-box {

@@ -12,6 +12,11 @@ def eliminarTrans(request,id_tr):
     tr.delete()
     return redirect('/operaciones')
 
+def eliminarEfectivo(request,id_bill):
+    tr=billetera.objects.get(id_b=id_bill)
+    tr.delete()
+    return redirect('/compraEfectivo')
+
 def registrarcuenta(request):
     ban= request.POST['banco']
     tip=request.POST['tipoDcuenta']
@@ -48,7 +53,7 @@ def retirar(request,idcta):
     descr=request.POST['descrip']
     trans=transaccion.objects.create(retiro=monto,descripcion=descr,fecha=datetime.datetime.now(),id_c=cuenta.objects.get(id_c=idcta))
     if (trans):
-        efect=transaccion.objects.create(Abono=monto,descripcion="ingreso efectivo",id_bill=billetera.objects.get(id_b=7))
+        efect=billetera.objects.create(Abono=monto,id_tr=transaccion.objects.get(id_t=trans.id_t))
     return redirect('/cuentas')
 
 def abonar(request,idcta):
@@ -80,15 +85,15 @@ def compraEfectivo(request):
     com=compra.objects.all()
     capitalAnterior=AbonosBilletera()
     for c in com:
-        if(c.id_transaccion.id_bill):    
-            c.retiro=c.id_transaccion.retiro
+        if(c.id_bill):    
+            c.retiro=c.id_bill.retiro
             c.subtotal=c.cantidad*c.precio_unitario
             c.capital=capitalAnterior
             c.chequera= c.capital - c.subtotal
-            c.fecha=c.id_transaccion.fecha    
+            c.fecha=c.id_bill.fecha    
             capitalAnterior=c.chequera
             list.append(c)               
-    return render(request,'comprasEfectivo.html',{'transacciones':list})
+    return render(request,'comprasEfectivo.html',{'compras':list})
 
 def operaciones(request):
     list=[]
@@ -147,7 +152,7 @@ def abonosbilletera(id_t,idbill):
     return suma
 
 def AbonosBilletera():
-    efectiv=transaccion.objects.filter(id_bill=billetera.objects.get(id_b=7))
+    efectiv=billetera.objects.all()
     suma=0
     if(efectiv):
         for tr in efectiv:

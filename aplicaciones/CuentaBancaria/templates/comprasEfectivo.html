@@ -18,21 +18,21 @@
         </tr>
     </thead>
     <tbody>
-            {% for t in transacciones %}
+            {% for c in compras %}
             <tr>
             <td data-label="Nro">{{forloop.counter}}</td>
-            <td data-label="DESCRIPCION">{{t.descripcion}}</td>
-            <td data-label="CANTIDAD">{{t.cantidad}}</td>
-            <td data-label="COSTO/U">{{t.precio_unitario}}</td>
-            <td data-label="TOTAL">{{t.subtotal}}</td>
-            <td data-label="EFECT DISP">{{t.capital}}</td>
-            <td data-label="PAGO">{{t.retiro}}</td>
-            <td data-label="SALDO DISP">{{t.chequera}}</td>
-            <td data-label="OBSERVACION">{{t.descripcion}}</td>
-            <td data-label="FECHA">{{t.fecha}}</td>
+            <td data-label="DESCRIPCION">{{c.descripcion}}</td>
+            <td data-label="CANTIDAD">{{c.cantidad}}</td>
+            <td data-label="COSTO/U">{{c.precio_unitario}}</td>
+            <td data-label="TOTAL">{{c.subtotal}}</td>
+            <td data-label="EFECT DISP">{{c.capital}}</td>
+            <td data-label="PAGO">{{c.retiro}}</td>
+            <td data-label="SALDO DISP">{{c.chequera}}</td>
+            <td data-label="OBSERVACION">{{c.descripcion}}</td>
+            <td data-label="FECHA">{{c.fecha}}</td>
             <td data-label="TAREAS">
-               <button><a class="btntabla" href="eliminarTrans/{{t.id_t}}">🗑️</a></button>
-               <button><a class="btntabla" href="editaOperacion/{{t.id_t}}">🖊️</a></button>
+               <button><a class="btntabla" href="eliminarEfec/{{c.id_bill}}">🗑️{{t.id_bill}}</a></button>
+               <button><a class="btntabla" href="editaOperacion/{{c.id_t}}">🖊️</a></button>
             </td>
             </tr>
         </form>

@@ -8,12 +8,12 @@ from .carrito import carro
 
 def compramenu(request):
     cuentas=filtraEstadosCuenta()
-    bill=billetera.objects.get(id_b=7)
+    bill=billetera.objects.all()
     bill.cap=filtrarestadoBilletera()
     return render(request,'cotizacion.html',{'cuenta':cuentas,'e':bill})
 
 def filtrarestadoBilletera():
-    efectiv=transaccion.objects.filter(id_bill=billetera.objects.get(id_b=7))
+    efectiv=billetera.objects.all()
     suma=0
     retiros=0
     if(efectiv):
@@ -51,16 +51,15 @@ def pagar(request):
     id_ct=int(request.POST['id_cta'])
     print('cuentaid',id_ct)
     num=int(request.POST['num'])
-    if (id_ct < 7):
-        pagoTransaccion(request,id_ct,num)
+    if (id_ct == 7):
+        pagarEfectivo(request,num)
     else:
-        pagarEfectivo(request,id_ct,num)
+        pagoTransaccion(request,id_ct,num)
     return redirect('/compra')
 
-def pagarEfectivo(request,id_ct,num):
-    id_bi=int(request.POST['id_cta'])
-    print('id_billetera',id_bi)
+def pagarEfectivo(request,num):
     num=int(request.POST['num'])
+    print('pago con efectivo')
     i=1
     while (i<=num):
         postdes='descrip'+str(i)     
@@ -79,6 +78,6 @@ def pagarEfectivo(request,id_ct,num):
         print('------------------------------')
         monto=cant*precioUnit
         i=i+1
-        trans=transaccion.objects.create(retiro=monto,descripcion="transac. compras/otros",id_bill=billetera.objects.get(id_b=id_bi))
-        comp=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_transaccion=transaccion.objects.get(id_t=trans.id_t))
-    
+        trans=billetera.objects.create(retiro=monto)
+        print(trans.id_b)
+        comp=compra.objects.create(descripcion=descrip,cantidad=cant,precio_unitario=precioUnit,tipo=tip,id_bill=billetera.objects.get(id_b=trans.id_b))
